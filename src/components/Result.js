@@ -10,7 +10,7 @@ const Result = (props) => {
             </>
         );
     }
-    return (<></>);
+    return null;
 }
 
 const mapStateToProps = (state) => {

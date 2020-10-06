@@ -21,16 +21,13 @@ class Form extends React.Component {
         }
     }
 
-    handlePrincipal = (event) => {
-        this.setState({principal:event.target.value});
-    }
-
-    handleRate = (event) => {
-        this.setState({rate:event.target.value});
-    }
-
-    handleYears = (event) => {
-        this.setState({years:event.target.value});
+    //returns function to handle changes of given state key
+    handleChange = (key) => {
+        return ((event) => {
+            let changes = {};
+            changes[key] = event.target.value;
+            this.setState(changes);
+        })
     }
 
     render = () => {
@@ -42,7 +39,7 @@ class Form extends React.Component {
                         <input 
                             type='number' 
                             value={this.state.principal} 
-                            onChange={this.handlePrincipal}
+                            onChange={this.handleChange('principal')}
                         />
                     </label>
                 </p>
@@ -52,7 +49,7 @@ class Form extends React.Component {
                         <input 
                             type='number' 
                             value={this.state.rate}
-                            onChange={this.handleRate}
+                            onChange={this.handleChange('rate')}
                         />
                     </label>
                 </p>
@@ -63,7 +60,7 @@ class Form extends React.Component {
                         <input 
                             type='number' 
                             value={this.state.years}
-                            onChange={this.handleYears}
+                            onChange={this.handleChange('years')}
                         />
                     </label>
                 </p>
