@@ -1,23 +1,33 @@
-import {SET_PRINCIPAL, SET_RATE, SET_YEARS} from './actionTypes';
+import {CALC_INT} from './actionTypes';
 
 const initialState = {
-    principal: undefined,
-    rate: undefined,
-    years: undefined,
-    final: undefined,
-    gained: undefined,
+    final: '',
+    gained: '',
 }
 
 export default (state = initialState, action) => {
 
     switch(action.type) {
-        case SET_PRINCIPAL:
-            return state;
-        case SET_RATE:
-            return state;
-        case SET_YEARS:
-            return state;
+        case CALC_INT:
+
+            const principal = parseFloat(action.principal);
+            const rate = parseFloat(action.rate)/100; //account for % conversion
+            const years = parseFloat(action.years);
+
+            //ensure all numbers
+            if (principal && rate && years){
+                const final = principal * (1 + (rate*years));
+                return {
+                    ...state,
+                    final,
+                    gained: final-principal,
+                }
+            }
+            //otherwise reset
+            return initialState;
+
         default:
+            
             return state;
     }
 }

@@ -1,14 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class Result extends React.Component {
-
-    render() {
-        return (<h1>w</h1>)
-    }
+const Result = (props) => {
+    return (
+        <>
+            <p>Earned: ${props.gained}</p>
+            <p>Total: ${props.final}</p>
+        </>
+    )
 }
 
-const mapStateToProps = null;
+const mapStateToProps = (state) => {
+    return {
+        final: state.final,
+        gained: state.gained,
+    }
+};
 
 const mapDispatchToProps = null;
 

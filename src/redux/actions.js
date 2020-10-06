@@ -1,22 +1,10 @@
-import {SET_PRINCIPAL, SET_RATE, SET_YEARS} from './actionTypes';
+import {CALC_INT} from './actionTypes';
 
-export const setPrincipal = (principal) => {
+export const calcInt = (principal, rate, years) => {
     return {
-        type: SET_PRINCIPAL,
+        type: CALC_INT,
         principal,
-    };
-}
-
-export const setRate = (rate) => {
-    return {
-        type: SET_RATE,
         rate,
-    };
-}
-
-export const setYears = (years) => {
-    return {
-        type: SET_YEARS,
         years,
     };
 }
