@@ -15,19 +15,22 @@ class Form extends React.Component {
         }
     }
 
+    componentDidUpdate = (_prevProps, prevState) => {
+        if (prevState !== this.state) {
+            this.props.calcInt(this.state.principal, this.state.rate, this.state.years);
+        }
+    }
+
     handlePrincipal = (event) => {
         this.setState({principal:event.target.value});
-        this.props.calcInt(this.state.principal, this.state.rate, this.state.years);
     }
 
     handleRate = (event) => {
         this.setState({rate:event.target.value});
-        this.props.calcInt(this.state.principal, this.state.rate, this.state.years);
     }
 
     handleYears = (event) => {
         this.setState({years:event.target.value});
-        this.props.calcInt(this.state.principal, this.state.rate, this.state.years);
     }
 
     render = () => {
@@ -66,7 +69,7 @@ class Form extends React.Component {
                 </p>
                 
             </>
-        )
+        );
     }
 }
 
