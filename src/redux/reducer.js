@@ -1,22 +1,22 @@
-import actionTypes from './actionTypes';
+import {SET_PRINCIPAL, SET_RATE, SET_YEARS} from './actionTypes';
 
 const initialState = {
-    principal: null,
-    rate: null,
-    years: null,
-    final: null,
-    gained: null,
+    principal: undefined,
+    rate: undefined,
+    years: undefined,
+    final: undefined,
+    gained: undefined,
 }
 
 export default (state = initialState, action) => {
 
     switch(action.type) {
-        case actionTypes.SET_PRINCIPAL:
-
-        case actionTypes.SET_RATE:
-
-        case actionTypes.SET_YEARS:
-
+        case SET_PRINCIPAL:
+            return state;
+        case SET_RATE:
+            return state;
+        case SET_YEARS:
+            return state;
         default:
             return state;
     }
