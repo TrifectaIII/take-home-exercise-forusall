@@ -1,5 +1,6 @@
 import {CALC_INT} from './actionTypes';
 
+//initial state of reducer
 const initialState = {
     final: null,
     gained: null,
@@ -13,7 +14,7 @@ export default (state = initialState, action) => {
 
             //convert input values to floats
             const principal = parseFloat(action.principal);
-            const rate = parseFloat(action.rate)/100; //account for % conversion
+            const rate = parseFloat(action.rate)/100; //convert form % to decimal
             const years = parseFloat(action.years);
 
             //ensure no NaN
@@ -25,9 +26,11 @@ export default (state = initialState, action) => {
                 return {
                     ...state,
                     final: final,
+                    //gained is delta between principal and final amounts
                     gained: final-principal,
                 }
             }
+            
             //otherwise reset
             return initialState;
 

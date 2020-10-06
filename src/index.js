@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 //access redux store
 import store from './redux/store'
 
+//wrap app in Provider to pass down redux access
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -1,6 +1,7 @@
 import {createStore} from 'redux';
 import reducer from './reducer';
 
+//redux store creation, using reducer
 export default createStore(
     reducer, 
     //for redux devtools extension
