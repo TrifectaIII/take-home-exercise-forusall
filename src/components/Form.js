@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {calcInt} from '../redux/actions';
+import {calcIntSimple, calcIntCompound} from '../redux/actions';
 
 //component to accept calculation inputs
 class Form extends React.Component {
@@ -14,14 +14,24 @@ class Form extends React.Component {
             principal: '',
             rate: '',
             years: '',
+            times: '',
+            selected: 'simple',
         }
     }
 
     //dispatch event to redux whenever state changes
     componentDidUpdate = (_prevProps, prevState) => {
-        if (prevState !== this.state) {
-            this.props.calcInt(this.state.principal, this.state.rate, this.state.years);
+        switch(this.state.selected) {
+            case 'simple':
+                this.props.calcIntSimple(this.state.principal, this.state.rate, this.state.years);
+                break;
+            case 'compound':
+                this.props.calcIntCompound(this.state.principal, this.state.rate, this.state.years, this.state.times);
+                break;
+            default:
+                return;
         }
+        
     }
 
     //returns function to handle changes of given state key
@@ -33,9 +43,20 @@ class Form extends React.Component {
         })
     }
 
+    handleSelect = (event) => {
+        this.setState({selected:event.target.value})
+    }  
+
     render = () => {
         return (
             <>
+
+                <p>
+                    <select value={this.state.selected} onChange={this.handleSelect}>
+                        <option value="simple">Simple Interest</option>
+                        <option value="compound">Compound Interest</option>
+                    </select>
+                </p>
                 <p>
                     <label>
                         Principal Amount ($)
@@ -67,6 +88,20 @@ class Form extends React.Component {
                         />
                     </label>
                 </p>
+
+                {this.state.selected === 'compound' ?  (
+                    <p>
+                        <label>
+                            Times Compounded (Per Year)
+                            <input 
+                                type='number' 
+                                value={this.state.times}
+                                onChange={this.genChangeHandler('times')}
+                            />
+                        </label>
+                    </p>) 
+                : null}
+                
             </>
         );
     }
@@ -76,7 +111,7 @@ class Form extends React.Component {
 const mapStateToProps = null;
 
 //form needs to dispatch input info to redux
-const mapDispatchToProps = {calcInt};
+const mapDispatchToProps = {calcIntSimple, calcIntCompound};
 
 //connect to redux
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
